@@ -21,9 +21,11 @@ let imageArr=[
 ];
 
 let newImage =[];
-
+let leftRandom =0;
 let counter = 0;
+let middleRandom =0;
 let round = 25;
+let rightRandom =0;
 
 const mainSection = document.getElementById('photos');
 let leftImage = document.getElementById('left');
@@ -47,9 +49,9 @@ for( let i =0 ;i<imageArr.length;i++){
 
 function render(){
 
-    let leftRandom = randomNumber( 0 , imageArr.length-1);
-    let middleRandom = randomNumber( 0 , imageArr.length-1);
-    let rightRandom = randomNumber( 0 , imageArr.length-1);
+     leftRandom = randomNumber( 0 , imageArr.length-1);
+     middleRandom = randomNumber( 0 , imageArr.length-1);
+     rightRandom = randomNumber( 0 , imageArr.length-1);
 
 leftImage.src = './img/' + Product.newImage[leftRandom].source;
 Product.newImage[leftRandom].shown++;
@@ -65,19 +67,18 @@ render();
 mainSection.addEventListener('click', newClick);
 function newClick(e) {
     
-    let leftRandom = randomNumber( 0 , imageArr.length-1);
-    let middleRandom = randomNumber( 0 , imageArr.length-1);
-    let rightRandom = randomNumber( 0 , imageArr.length-1);
+    
 
     if(e.target.id === 'left'  && counter < round ){
         Product.newImage[leftRandom].votes ++
-        
+        console.log(Product.newImage[leftRandom].votes)
         counter++;
         render();
        
     }else
     if(e.target.id === 'middle'  && counter < round ){
         Product.newImage[middleRandom].votes ++
+        console.log(Product.newImage[middleRandom].votes)
         counter++;
         render();
     }
@@ -86,6 +87,7 @@ function newClick(e) {
      
     if(e.target.id === 'right'  && counter < round ){
         Product.newImage[rightRandom].votes ++
+        console.log(Product.newImage[rightRandom].votes)
         counter++;
         render();
         
@@ -130,8 +132,9 @@ unorderedlist.appendChild(listItem)
 
     }
     
- 
+ buttonClick.removeEventListener('click' , getResult );
 }
+
 
 
 
