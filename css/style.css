@@ -17,7 +17,7 @@ header{
     
 }
 body{
-    width: 800px;
+    width: 850px;
     margin: auto;
     
 }
@@ -53,4 +53,9 @@ padding: 20px;
 justify-content: center;
   display: flex;
 
+}
+ul{
+    display: grid;
+    grid-template-columns: auto auto auto; 
+    
 }

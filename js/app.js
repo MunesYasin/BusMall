@@ -134,9 +134,3 @@ unorderedlist.appendChild(listItem)
     
  buttonClick.removeEventListener('click' , getResult );
 }
-
-
-
-
-
-
