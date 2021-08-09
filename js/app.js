@@ -92,6 +92,9 @@ function newClick(e) {
         render();
         
     }
+    if (counter >= round){
+        mainSection.removeEventListener('click', newClick);
+    }
     
 }
 
