@@ -48,10 +48,14 @@ for( let i =0 ;i<imageArr.length;i++){
 
 
 function render(){
-
+do {
      leftRandom = randomNumber( 0 , imageArr.length-1);
      middleRandom = randomNumber( 0 , imageArr.length-1);
      rightRandom = randomNumber( 0 , imageArr.length-1);
+    }while(
+        leftRandom === middleRandom || middleRandom === rightRandom || leftRandom === rightRandom 
+    )
+
 
 leftImage.src = './img/' + Product.newImage[leftRandom].source;
 Product.newImage[leftRandom].shown++;
@@ -134,6 +138,59 @@ unorderedlist.appendChild(listItem)
 
 
     }
-    
+
+   
  buttonClick.removeEventListener('click' , getResult );
+ createChart();
 }
+
+function createChart (){
+    let nameArr = [];
+    let shownArr = [];
+    let voteArr = [];
+     
+    for ( let i =0 ;i <Product.newImage.length;i++){
+
+        nameArr.push(Product.newImage[i].name);
+        shownArr.push(Product.newImage[i].shown);
+        voteArr.push(Product.newImage[i].votes);
+    }
+console.log(nameArr)
+console.log(shownArr)
+console.log(voteArr)
+let ctx = document.getElementById( 'chart' ).getContext( '2d' );
+for (let i =0 ; i<nameArr.length;i++){
+let myChart = new Chart( ctx, {
+  type: 'bar',
+  data: {
+    labels: nameArr,
+    datasets: [{
+      label: ' shown',
+      data: shownArr,
+      backgroundColor:
+              'rgba(2955, 9, 132, 0.2)',
+      borderWidth: 2,},
+      {
+        label: ' votes',
+      data: voteArr,
+      backgroundColor:
+              'rgba(0, 0, 0, 1)',
+      borderWidth: 2,
+      
+
+    }]
+    
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+} )};
+}
+
+
+
+
