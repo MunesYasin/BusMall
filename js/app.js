@@ -32,19 +32,22 @@ let leftImage = document.getElementById('left');
 let middleImage = document.getElementById('middle');
 let rightImage =document.getElementById('right');
 
-function Product(imageName , imageSource){
+function Product(imageName , imageSource , votes =0 , shown = 0){
 this.name = imageName;
 this.source = imageSource;
-this.votes=0;
-this.shown=0;
+this.votes=votes;
+this.shown=shown;
 Product.newImage.push(this);
 
 }
 
 Product.newImage =[];
-for( let i =0 ;i<imageArr.length;i++){
-    new Product(imageArr[i].split('.')[0], imageArr[i]);
-}
+
+getStorage();
+
+//for( let i =0 ;i<imageArr.length;i++){
+  //  new Product(imageArr[i].split('.')[0], imageArr[i]);
+//}
 
 
 function render(){
@@ -63,6 +66,9 @@ middleImage.src = './img/' + Product.newImage[middleRandom].source;
 Product.newImage[middleRandom].shown++;
 rightImage.src = './img/' + Product.newImage[rightRandom].source;
 Product.newImage[rightRandom].shown++;
+
+localStorage.data = JSON.stringify(Product.newImage)
+
 
 
 }
@@ -158,9 +164,13 @@ function createChart (){
 console.log(nameArr)
 console.log(shownArr)
 console.log(voteArr)
+
 let ctx = document.getElementById( 'chart' ).getContext( '2d' );
+
 for (let i =0 ; i<nameArr.length;i++){
+
 let myChart = new Chart( ctx, {
+
   type: 'bar',
   data: {
     labels: nameArr,
@@ -190,7 +200,27 @@ let myChart = new Chart( ctx, {
   }
 } )};
 }
+function getStorage (){
+
+    if (localStorage.data){
+
+let data = JSON.parse(localStorage.data);
+for(let i = 0 ; i<imageArr.length;i++){
 
 
+    new Product(data[i].name , data[i].source,data[i].votes, data[i].shown);
+}
+{
+
+}
+
+    }else{
+        for(let i = 0 ; i<imageArr.length;i++){
+        new Product(imageArr[i].split('.')[0], imageArr[i]);
+
+    }
+}
+
+}
 
 
